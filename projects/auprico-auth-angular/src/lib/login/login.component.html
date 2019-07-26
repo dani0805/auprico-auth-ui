@@ -1,0 +1,25 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-12">
+      <h2>Login</h2>
+      <div>
+          <mat-form-field class="mat-full-width" (keyup.enter)="login()">
+              <input matInput placeholder="Username" [(ngModel)]="model.username" required/>
+          </mat-form-field>
+          <mat-form-field class="mat-full-width" (keyup.enter)="login()">
+              <input #password matInput placeholder="Password" [(ngModel)]="model.password" required type="password"/>
+          </mat-form-field>
+
+          <!-- <div class="form-group">
+              Not registered yet? <a id="register-link" (click)="navigateToRegister()">register here</a>
+          </div> -->
+          <div class="aligned-right">
+              <button mat-raised-button color="primary" [disabled]="loading"   (click)="login()">
+                  Login
+              </button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VersionedInputComponent } from './versioned-input/versioned-input.component';
-import { MatFormFieldModule, MatInputModule } from "@angular/material";
+import { LoginComponent } from './login/login.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { AupricoAuthAngularService } from './auprico-auth-angular.service';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
-  declarations: [VersionedInputComponent],
+  declarations: [VersionedInputComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CommonModule
   ],
-  exports: [VersionedInputComponent]
+  exports: [VersionedInputComponent],
+  providers: [AupricoAuthAngularService]
 })
 export class AupricoAuthAngularModule { }
