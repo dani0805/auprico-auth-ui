@@ -5,6 +5,9 @@ import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AupricoAuthAngularService } from './auprico-auth-angular.service';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import { UrlResolverService } from './url-resolver.service';
+import {SingleUserService} from './model/user/user.service';
 
 @NgModule({
   declarations: [VersionedInputComponent, LoginComponent],
@@ -12,9 +15,18 @@ import {CommonModule} from '@angular/common';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
     CommonModule
   ],
-  exports: [VersionedInputComponent],
-  providers: [AupricoAuthAngularService]
+  exports: [
+    VersionedInputComponent,
+    LoginComponent
+  ],
+  providers: [
+    AupricoAuthAngularService,
+    UrlResolverService,
+    SingleUserService
+  ]
 })
+
 export class AupricoAuthAngularModule { }

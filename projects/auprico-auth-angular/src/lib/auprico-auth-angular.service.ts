@@ -3,6 +3,12 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
+import { Apollo } from 'apollo-angular';
+import * as MUser from './model/user/user';
+import {UrlResolverService} from './url-resolver.service';
+import {parseAttr, pkToBase64} from './model/versioned-model';
+import gql from 'graphql-tag';
+
 
 @Injectable({
   providedIn: 'root'
@@ -62,17 +68,17 @@ private jwsHelper = require('jws');
     }
 
     hasToken(): boolean {
-        let token = localStorage.getItem('token');
-        return token != null && token != "";
+        const token = localStorage.getItem('token');
+        return token != null && token != '';
     }
 
     async tokenIsValid(): Promise<boolean> {
-        let refreshUrl = this.urlResolverService.apiUrlForPath(['api-token-auth/refresh/']);
-        let oldToken = localStorage.getItem('token');
-        let headers = new HttpHeaders({'Accept': 'application/json', 'Content-Type': 'application/json'});
+        const refreshUrl = this.urlResolverService.apiUrlForPath(['api-token-auth/refresh/']);
+        const oldToken = localStorage.getItem('token');
+        const headers = new HttpHeaders({'Accept': 'application/json', 'Content-Type': 'application/json'});
         try {
-            let res = <Observable<Object>>await this.http.post(refreshUrl, {token: oldToken, headers: headers}).toPromise();
-            let token = res["token"];
+            const res = <Observable<Object>>await this.http.post(refreshUrl, {token: oldToken, headers: headers}).toPromise();
+            const token = res['token'];
             if (res && token) {
                 localStorage.setItem('token', token);
                 return true;
@@ -85,15 +91,14 @@ private jwsHelper = require('jws');
     }
 
     fetchLoggedInUser() {
-        let token = localStorage.getItem('token');
-        console.log('token in fetchLoggedInUser ', token)
-        let decoded = this.jwsHelper.decode(token);
-        let userId = decoded && decoded.payload.user_id;
+        const token = localStorage.getItem('token');
+        console.log('token in fetchLoggedInUser ', token);
+        const decoded = this.jwsHelper.decode(token);
+        const userId = decoded && decoded.payload.user_id;
         if (!userId) {
-            console.error("No userId stored: error.");
-            //return;
+            console.error('No userId stored: error.');
         }
-        let query = gql`
+        const query = gql`
         query loggedInUser($id: ID!) {
             user(id: $id) {
                 ...userFragment
@@ -104,14 +109,14 @@ private jwsHelper = require('jws');
         // avoid cache to retrieve always the update version of the authentication info
         this.apollo.query({
             query: query,
-            variables: {id: pkToBase64("UserNode", userId)},
-            fetchPolicy: "network-only"
+            variables: {id: pkToBase64('UserNode', userId)},
+            fetchPolicy: 'network-only'
 
         }).toPromise().then(
             res => {
                 if (res.data) {
-                    let parsed = parseAttr<MUser.BUser>(res.data, MUser.BUser, "user");
-                    console.log('parsed user ', parsed)
+                    const parsed = parseAttr<MUser.BUser>(res.data, MUser.BUser, 'user');
+                    console.log('parsed user ', parsed);
                     this.user.next(parsed);
                 } else {
                     this.user.next(undefined);

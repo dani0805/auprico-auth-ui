@@ -1,5 +1,5 @@
 
-import {DateUtility} from "../utility/date-utility";
+import {DateUtility} from '../utility/date-utility';
 
 export class VersionedModel {
   id: string;
@@ -120,4 +120,25 @@ export function base64ToPK(b64: string): number {
 
 export function pkToBase64(nodeClass: string, pk: number): string {
     return btoa(`${nodeClass}:${pk}`);
+}
+
+export function parseArray<T>(json: any, classProto: any, attrName: string): T[] {
+    if (!(json && json[attrName] && json[attrName]["edges"]) || !classProto) {
+        return [];
+    }
+    let edges: any[] = json[attrName]["edges"];
+    let res = [];
+    //console.log("edges", edges);
+    for (let x of edges) {
+        res.push(new classProto(x["node"]));
+    }
+    //console.log("res", res);
+    return res;
+}
+
+export function parseAttr<T>(json: any, classProto: any, attrName: string): T {
+    if (json && json[attrName]) {
+        return new classProto(json[attrName]);
+    }
+    return undefined;
 }
