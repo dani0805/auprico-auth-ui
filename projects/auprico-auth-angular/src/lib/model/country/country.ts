@@ -22,14 +22,6 @@ export class BCountry extends BaseModel {
         // manually deserialize relations
         this.defaultLanguage = parseAttr<BLanguage>(json, BLanguage, 'defaultLanguage');
     }
-
-    getMId() {
-        return base64ToPK(this.id);
-    }
-
-    getMName() {
-        return this.name;
-    }
 }
 
 
@@ -38,8 +30,7 @@ export const fragment = gql`
     id,
     name,
     code,
-    timezoneCode,
-    externalDpt
+    timezoneCode
   }
 `;
 

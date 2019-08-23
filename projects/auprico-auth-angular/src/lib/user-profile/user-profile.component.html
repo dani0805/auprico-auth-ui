@@ -1,0 +1,17 @@
+<div class="container-fluid" [ngClass]="{'mode-user': mode == 'user', 'mode-team': mode == 'team', 'not-personal': !isPersonalSettings}">
+  <div class="row spaced">
+    <div class="col">
+      <div class="font-weight-bold">USER SETTINGS OF {{ user?.fullName() }}</div>
+    </div>
+  </div>
+</div>
+<div [ngClass]="{'mode-user': mode == 'user', 'mode-team': mode == 'team', 'not-personal': !isPersonalSettings}">
+  <!-- USER VIEW -->
+  <ng-container *ngIf="mode == 'user'">
+    <mat-tab-group>
+      <mat-tab label="Contacts">
+          <lib-user-profile-contacts *ngIf="user" [user]="user"></lib-user-profile-contacts>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</div>

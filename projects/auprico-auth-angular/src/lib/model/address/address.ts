@@ -20,6 +20,7 @@ export class BAddress extends BaseModel {
     @rProperty(Date) importedTs: string;
 
     country: BCountry;
+    edit = false;
 
     constructor(json: any) {
         super(json);
@@ -63,10 +64,7 @@ fragment addressFragment on AddressNode {
     isMain,
     createdTs,
     editedTs,
-    isDeleted,
-    importedId,
-    importedSource,
-    importedTs
+    isDeleted
 }
 `;
 

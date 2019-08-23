@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VersionedInputComponent } from './versioned-input/versioned-input.component';
 import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
@@ -12,7 +11,6 @@ import {SingleUserService} from './model/user/user.service';
 @NgModule({
   declarations: [VersionedInputComponent, LoginComponent],
   imports: [
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

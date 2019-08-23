@@ -13,6 +13,8 @@ export class BEmail extends BaseModel {
     @rProperty() importedSource: string;
     @rProperty(Date) importedTs: string;
 
+    edit = false;
+
     constructor(json: any) {
         super(json);
         this.init(json);
@@ -38,13 +40,11 @@ fragment emailFragment on EmailNode {
     id,
     label,
     val,
+    value,
     isMain,
     createdTs,
     editedTs,
-    isDeleted,
-    importedId,
-    importedSource,
-    importedTs
+    isDeleted
 }
 `;
 

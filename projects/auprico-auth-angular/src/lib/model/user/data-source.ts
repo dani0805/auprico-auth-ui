@@ -1,7 +1,8 @@
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { BUser } from './user';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { UserService, UserServiceFilter } from './user.service';
+import {CollectionViewer, DataSource} from '@angular/cdk/typings/esm5/collections';
+import {BUser} from './user';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {UserService, UserServiceFilter} from './user.service';
+
 
 export class UsersDataSource implements DataSource<BUser> {
 
@@ -20,11 +21,9 @@ export class UsersDataSource implements DataSource<BUser> {
         this.userService.values.subscribe(data => {
                 this.loadingUsers.next(false);
                 this.users.next(data);
-                // console.log(this.users);
             }
         );
         this.userService.count.subscribe(value => {
-                // console.log(value);
                 this.count.next(value);
             }
         );
@@ -51,7 +50,7 @@ export class UsersDataSource implements DataSource<BUser> {
         this.loadingUsers.next(true);
         let filterValue = filter.trim(); // Remove whitespace
         if (filterValue.length < 3 && filterValue.length > 0) {
-            filterValue = '';
+            filterValue = "";
         }
         filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
         const userFilter = new UserServiceFilter(filterValue);

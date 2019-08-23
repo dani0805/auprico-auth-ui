@@ -1,7 +1,11 @@
-import gql from 'graphql-tag';
-
 import * as MUser from './user';
 import * as MLanguage from '../language/language';
+import * as MEmail from '../email/email';
+import * as MPhone from '../phone/phone';
+import * as MAddress from '../address/address';
+import * as MCountry from '../country/country';
+
+import gql from 'graphql-tag';
 
 
 export const userQuery = gql`
@@ -37,14 +41,36 @@ mutation updateUser($params:UpdateUserInput!) {
     updateUser(input:$params){
         user {
         ...userFragment,
+        gender,
+        title,
         language {
           ...languageFragment
+        },
+        emails {
+          ...emailConnectionFragment
+        },
+        phones {
+          ...phoneConnectionFragment
+        },
+        addresses {
+          edges {
+            node {
+              ...addressFragment
+              country {
+                ...countryFragment
+              }
+            }
+          }
         }
       }
     }
 }
 ${ MUser.fragment }
 ${ MLanguage.fragment }
+${ MEmail.fragmentConnection }
+${ MPhone.fragmentConnection }
+${ MAddress.fragment }
+${ MCountry.fragment }
 `;
 
 export const singleUserQuery = gql`

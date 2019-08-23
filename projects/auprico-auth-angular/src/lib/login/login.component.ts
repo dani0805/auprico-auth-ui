@@ -22,14 +22,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.model.username, this.model.password)
         .subscribe(data => {
             if (data === true) {
-                // login successful
-                // this.router.navigate(['/']);
-                // TODO handle with Angular Router
-                // window.location.href = '/';
-                // this.router.navigate(['inq','list']);
-                // used reloading otherwise app component it is not loaded properly and subscription
-                // for user does not work... to be reviewed
-                // window.location.href = '/'
+              window.location.href = '/batch/list';
             } else {
                 // login failed
                 this.error = 'Username or password is incorrect';

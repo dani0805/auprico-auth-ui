@@ -1,0 +1,21 @@
+<h4 mat-dialog-title [innerHtml]="title"></h4>
+<mat-dialog-content>
+    <span [innerHtml]="message"></span>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <mat-slide-toggle *ngIf="isCheckboxAvailable"
+                        [(ngModel)]="checkboxValue"
+                        (ngModelChange)="checkbox.next(checkboxValue)">
+                    Do not show again
+                </mat-slide-toggle>
+                <button *ngIf="isCancelAvailable" mat-raised-button (click)="saveResponse(false)">{{cancelButtonLabel}}</button>
+            </div>
+            <div class="col aligned-right">
+                <button mat-raised-button color="primary"   (click)="saveResponse(true)">{{saveButtonLabel}}</button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>

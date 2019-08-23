@@ -14,6 +14,8 @@ export class BPhone extends BaseModel {
     @rProperty() importedSource: string;
     @rProperty(Date) importedTs: string;
 
+    edit = false;
+
 
     constructor(json: any) {
         super(json);
@@ -43,10 +45,7 @@ fragment phoneFragment on PhoneNode {
     isMain,
     createdTs,
     editedTs,
-    isDeleted,
-    importedId,
-    importedSource,
-    importedTs
+    isDeleted
 }
 `;
 
