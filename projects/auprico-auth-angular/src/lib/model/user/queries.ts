@@ -81,3 +81,18 @@ export const singleUserQuery = gql`
   }
   ${ MUser.fragment }
   `;
+
+
+export const mutateUserPassword = gql`
+mutation updateUserPassword($params:UpdateUserPasswordInput!) {
+    updateUserPassword(input:$params){
+        user {
+          id,
+          firstName,
+          lastName,
+          username,
+          password
+      },
+    }
+}
+`;

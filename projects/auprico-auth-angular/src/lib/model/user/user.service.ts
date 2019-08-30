@@ -1,12 +1,14 @@
 
 import {Injectable} from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import {userQuery, createUser, mutateUser, singleUserQuery} from './queries';
+import {userQuery, createUser, mutateUser, singleUserQuery, mutateUserPassword} from './queries';
 
 import { BUser } from './user';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {parseArray, parseAttr, pkToBase64} from '../versioned-model';
 import {createGuid} from '../../utility/uuid-generator';
+import {MessageHandlerService} from "../../common/message-handler/message-handler.service";
+import {ExceptionHandlerService} from "../../common/exception-handler/exception-handler.service";
 
 
 // Instead of following what is done in the old user search interface,
@@ -224,4 +226,40 @@ export class SingleUserService {
         });
     }
 
+}
+
+@Injectable()
+export class UserEditPasswordService {
+    user: Subject<Object> = new Subject<Object>();
+    response: Subject<BUser> = new Subject<BUser>();
+
+    constructor(
+        private apollo: Apollo, private messageService: MessageHandlerService,
+        private exceptionService: ExceptionHandlerService) {
+        this.user.subscribe(toMutate => {
+            let mutationData = {};
+            mutationData = Object.assign({}, toMutate)
+            mutationData['clientMutationId'] = createGuid();
+            const mutation = apollo.mutate({
+                mutation: mutateUserPassword,
+                variables: {params: mutationData}
+            });
+            mutation.subscribe(response => {
+                    if (response) {
+                        this.messageService.messageStream.next("User password updated correctly.");
+                        const userResponseData = response.data['updateUserPassword'];
+                        const changedUser = parseAttr<BUser>(userResponseData, BUser, 'user');
+                        this.response.next(changedUser);
+                    } else {
+                        this.response.next(undefined);
+                        this.exceptionService.errorStream.next("User Password Edit: empty response");
+                    }
+                },
+                error => {
+                    this.exceptionService.errorStream.next("(User Password Edit) " + error);
+                });
+        });
+
+
+    }
 }

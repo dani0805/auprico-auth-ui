@@ -7,6 +7,8 @@ import { UserProfileContactsComponent } from './user-profile-contacts/user-profi
 import {MatTabsModule} from '@angular/material';
 import {ICommonModule} from '../common/common.module';
 import {AupricoAuthAngularModule} from '../auprico-auth-angular.module';
+import {UserAddressComponent} from './user-address/user-address.component';
+import {UserPasswordResetComponent} from './user-password-reset/user-password-reset.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import {AupricoAuthAngularModule} from '../auprico-auth-angular.module';
   ],
     declarations: [
       UserProfileComponent,
-      UserProfileContactsComponent
+      UserProfileContactsComponent,
+      UserAddressComponent,
+      UserPasswordResetComponent
     ],
     providers: [],
     entryComponents: [

@@ -21,22 +21,22 @@ export class BUser extends BaseModel {
       super(json);
       this.init(json);
 
-      this.emails = parseArray<BEmail>(json, BEmail, 'emails');
-      this.phones = parseArray<BPhone>(json, BPhone, 'phones');
-      this.addresses = parseArray<BAddress>(json, BAddress, 'addresses');
-
-      if (this.phones.length == 0) {
-        this.phones = [new BPhone('')];
-      }
-      if (this.emails.length == 0) {
-        this.emails = [new BEmail('')];
-      }
-      if (this.addresses.length == 0) {
-        this.addresses = [new BAddress('')];
-      }
   }
 
   init(json: any) {
+    this.emails = parseArray<BEmail>(json, BEmail, 'emails');
+    this.phones = parseArray<BPhone>(json, BPhone, 'phones');
+    this.addresses = parseArray<BAddress>(json, BAddress, 'addresses');
+
+    if (this.phones == null || this.phones.length == 0) {
+      this.phones = [new BPhone('')];
+    }
+    if (this.emails == null || this.emails.length == 0) {
+      this.emails = [new BEmail('')];
+    }
+    if (this.addresses == null || this.addresses.length == 0) {
+      this.addresses = [new BAddress('')];
+    }
   }
 
   fullName(): string {

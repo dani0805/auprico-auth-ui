@@ -143,37 +143,31 @@
                 <div *ngFor="let email of user.emails" [ngClass]="{ 'contact-deleted': email.isDeleted }">
                     <div class="row contact-row" [ngClass]="{ 'imported' : fieldImported(email)}">
                         <div class="col" *ngIf="!email.edit || email?.importedId">
-                            <mat-form-field class="mat-full-width">
-                                <mat-icon matPrefix class="container-contact-icons">
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                </mat-icon>
-                                <input id="email-{{email.id}}" matInput placeholder="{{email.label}}"
-                                       [(ngModel)]="email.val"
-                                       (click)="switchContactControl(email)" (focus)="switchContactControl(email)"
-                                       [readonly]="email?.importedId"/>
-                                <mat-icon matSuffix class="container-contact-icons">
-                                    <i class="fa " aria-hidden="true"
-                                       [ngClass]="{ 'preferred': email.isMain, 'fa-star': email.isMain, 'fa-star-o': !email.isMain}"
-                                       (click)="setPreferred(email)"></i>
-                                </mat-icon>
-                                <mat-icon matSuffix class="container-contact-icons">
-                                    <i class="fa fa-trash" aria-hidden="true" (click)="deleteContact(email)"></i>
-                                </mat-icon>
-                            </mat-form-field>
+                          <mat-form-field class="mat-full-width" [formGroup]="emailGroup">
+                            <input id="email-{{email.id}}"
+                                   matInput
+                                   placeholder="{{email.label}}"
+                                   [(ngModel)]="email.value"
+                                   formControlName="value"
+                                   (click)="switchContactControl(email)"
+                                   (focus)="switchContactControl(email)"/>
+
+                          </mat-form-field>
                         </div>
                         <div class="col-4" *ngIf="email.edit">
-                            <mat-form-field class="mat-full-width" (click)="labelOptionsVisible=true;"
-                                            (focusout)="labelOptionsVisible=false; labelSelected=false;">
-                                <input id="email-{{email.label}}" matInput placeholder="Label" [(ngModel)]="email.label"
-                                       required/>
-                                <mat-list [ngClass]="{ 'hidden': !labelOptionsVisible || labelSelected }"
-                                          class="suggest-list">
-                                    <mat-list-item *ngFor="let option of emailLabelOptions"
-                                                   (click)="email.label=option; labelSelected=true;">
-                                        <div> {{option}}</div>
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-form-field>
+
+                          <mat-form-field class="mat-full-width" [formGroup]="emailGroup">
+                            <input id="email-{{email.label}}"
+                                   matInput placeholder="Label"
+                                   [(ngModel)]="email.label"
+                                   formControlName="label"
+                                   [matAutocomplete]="emailAutocomplete"/>
+                            <mat-autocomplete #emailAutocomplete="matAutocomplete">
+                              <mat-option *ngFor="let option of emailLabelOptions" [value]="option">
+                                {{ option }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
                         </div>
 
                         <div class="col-8" *ngIf="email.edit">
@@ -182,11 +176,11 @@
                                     <i class="fa fa-envelope" aria-hidden="true"></i>
                                 </mat-icon>
                                 <input id="email-{{email.id}}" *ngIf="email.id" matInput placeholder="{{email.label}}"
-                                       [(ngModel)]="email.val" formControlName="email{{email.formControlIndex}}"
+                                       [(ngModel)]="email.value" formControlName="email{{email.formControlIndex}}"
                                        [ngClass]="{ 'suggestion': email.isSuggestion }"
                                        (focusout)="checkPreferredChannel(email);email.edit=false;"/>
                                 <input id="email-{{email.id}}" *ngIf="!email.id" matInput placeholder="Enter email"
-                                       [(ngModel)]="email.val" formControlName="email{{email.formControlIndex}}"
+                                       [(ngModel)]="email.value" formControlName="email{{email.formControlIndex}}"
                                        [ngClass]="{ 'suggestion': email.isSuggestion }"
                                        (focusout)="checkPreferredChannel(email);email.edit=false;"/>
                                 <mat-icon matSuffix class="container-contact-icons">
@@ -244,13 +238,9 @@
                                                     (focusout)="labelOptionsVisible=false; labelSelected=false;">
                                         <input id="phone-{{phone.label}}" matInput placeholder="Label"
                                                [(ngModel)]="phone.label"/>
-                                        <mat-list [ngClass]="{ 'hidden': !labelOptionsVisible || labelSelected }"
-                                                  class="suggest-list">
-                                            <mat-list-item *ngFor="let option of phoneLabelOptions"
-                                                           (click)="phone.label=option; labelSelected=true;">
-                                                <div> {{option}}</div>
-                                            </mat-list-item>
-                                        </mat-list>
+                                        <mat-option *ngFor="let option of phoneLabelOptions" [value]="option">
+                                          {{ option }}
+                                        </mat-option>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-8" *ngIf="phone.edit">
@@ -309,9 +299,9 @@
                                 </mat-icon>
                             </mat-form-field>
                         </div>
-<!--                        <div class="col" *ngIf="address.edit">-->
-<!--                            <app-inquirer-address [address]="address"></app-inquirer-address>-->
-<!--                        </div>-->
+                        <div class="col" *ngIf="address.edit">
+                            <lib-user-address [address]="address"></lib-user-address>
+                        </div>
                         <mat-icon matSuffix class="container-contact-icons address-edit" *ngIf="address.edit">
                             <i class="fa" aria-hidden="true"
                                [ngClass]="{ 'preferred': address.isMain, 'fa-star': address.isMain, 'fa-star-o': !address.isMain }"

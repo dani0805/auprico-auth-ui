@@ -1,0 +1,68 @@
+<ng-container *ngIf="address">
+  <div>
+      <div class="row ">
+        <div class="col-4">
+          <mat-form-field class="mat-full-width" [formGroup]="addressGroup">
+            <input matInput placeholder="Address Label" [(ngModel)]="address.label" (ngModelChange)="triggerChange()" formControlName="label" [matAutocomplete]="addressAutocomplete"/>
+            <mat-autocomplete #addressAutocomplete="matAutocomplete">
+              <mat-option *ngFor="let option of labelOptions" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="addressGroup?.controls?.label?.hasError('required')">
+              Label is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col">
+          <mat-form-field class="mat-full-width" [formGroup]="addressGroup">
+            <input matInput placeholder="Address 1" [(ngModel)]="address.address1" (ngModelChange)="triggerChange()" formControlName="address1"/>
+            <mat-error *ngIf="addressGroup?.controls?.address1?.hasError('required')">
+              Address 1 is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="mat-full-width">
+            <input matInput placeholder="Address 2" [(ngModel)]="address.address2" (ngModelChange)="triggerChange()"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col">
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="City" [(ngModel)]="address.city" (ngModelChange)="triggerChange()"/>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field class="mat-full-width" [formGroup]="addressGroup">
+              <input matInput placeholder="Zip Code" [(ngModel)]="address.zipCode" (ngModelChange)="triggerChange()" formControlName="zipCode"/>
+              <mat-error *ngIf="addressGroup?.controls?.zipCode?.hasError('maxlength')">
+                Max Length for Zip Code is <strong> 10 characters </strong>
+              </mat-error>
+            </mat-form-field>
+                  
+        </div>
+      </div>
+      <div class="row ">
+          <div class="col">
+              <mat-form-field class="mat-full-width">
+                <mat-select placeholder="Country" [ngModel]="address.country?.id" (ngModelChange)="address.country? address.country.id = $event : address.country = null; address.country.id = $event; triggerCountryChange()">
+                  <mat-option *ngFor="let country of countries" [value]="country.id">
+                    {{ country.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <div class="col">
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="State" [(ngModel)]="address.state" (ngModelChange)="triggerChange()"/>
+              </mat-form-field>  
+          </div>
+      </div>
+
+  </div>
+
+</ng-container>

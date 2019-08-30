@@ -6,7 +6,7 @@ import { AupricoAuthAngularService } from './auprico-auth-angular.service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { UrlResolverService } from './url-resolver.service';
-import {SingleUserService} from './model/user/user.service';
+import {SingleUserService, UserEditPasswordService} from './model/user/user.service';
 
 @NgModule({
   declarations: [VersionedInputComponent, LoginComponent],
@@ -23,7 +23,8 @@ import {SingleUserService} from './model/user/user.service';
   providers: [
     AupricoAuthAngularService,
     UrlResolverService,
-    SingleUserService
+    SingleUserService,
+    UserEditPasswordService
   ]
 })
 

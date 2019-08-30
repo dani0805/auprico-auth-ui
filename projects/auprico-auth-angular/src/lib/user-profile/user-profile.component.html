@@ -12,6 +12,9 @@
       <mat-tab label="Contacts">
           <lib-user-profile-contacts *ngIf="user" [user]="user"></lib-user-profile-contacts>
       </mat-tab>
+      <mat-tab label="Password Change">
+          <lib-user-password-reset *ngIf="user" [user]="user"></lib-user-password-reset>
+      </mat-tab>
     </mat-tab-group>
   </ng-container>
 </div>

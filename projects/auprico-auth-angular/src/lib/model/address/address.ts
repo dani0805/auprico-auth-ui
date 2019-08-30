@@ -53,53 +53,23 @@ export class BAddress extends BaseModel {
 }
 
 export const fragment = gql`
-fragment addressFragment on AddressNode {
-    id,
-    label,
-    address1,
-    address2,
-    city,
-    zipCode,
-    state,
-    isMain,
-    createdTs,
-    editedTs,
+fragment addressFragment on UserAddressNode {
+    id
+    label
+    address1
+    address2
+    city
+    state
+    zipCode
+    isMain
+    createdTs
+    editedTs
     isDeleted
 }
 `;
 
-export const fragmentNew = gql`
-fragment newAddressFragment on NewAddressNode {
-    id,
-    label,
-    address1,
-    address2,
-    city,
-    zipCode,
-    state,
-    isMain,
-    isDeleted,
-}
-`;
-
-export const fragmentRevision = gql`
-fragment addressRevisionFragment on RevisionAddressNode {
-    id,
-    label,
-    address1,
-    address2,
-    city,
-    zipCode,
-    state,
-    isMain,
-    createdTs,
-    editedTs,
-    isDeleted,
-}
-`;
-
 export const fragmentConnection = gql`
-fragment addressConnectionFragment on AddressNodeConnection {
+fragment addressConnectionFragment on UserAddressNodeConnection {
   edges {
     node {
       ...addressFragment

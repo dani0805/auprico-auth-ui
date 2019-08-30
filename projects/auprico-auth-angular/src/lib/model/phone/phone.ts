@@ -38,41 +38,19 @@ export class BPhone extends BaseModel {
 
 // fragments will contain only actual values of the object, no references to other tables
 export const fragment = gql`
-fragment phoneFragment on PhoneNode {
-    id,
-    label,
-    val,
-    isMain,
-    createdTs,
-    editedTs,
-    isDeleted
-}
-`;
-
-export const fragmentNew = gql`
-fragment newPhoneFragment on NewPhoneNode {
-    id,
-    label,
-    val,
-    isMain,
-    isDeleted,
-}
-`;
-
-export const fragmentRevision = gql`
-fragment phoneRevisionFragment on RevisionPhoneNode {
-    id,
-    label,
-    val,
-    isMain,
-    createdTs,
-    editedTs,
-    isDeleted,
+fragment phoneFragment on UserPhoneNode {
+  id
+  label
+  value
+  isMain
+  createdTs
+  editedTs
+  isDeleted
 }
 `;
 
 export const fragmentConnection = gql`
-fragment phoneConnectionFragment on PhoneNodeConnection {
+fragment phoneConnectionFragment on UserPhoneNodeConnection {
   edges {
     node {
       ...phoneFragment
@@ -80,26 +58,4 @@ fragment phoneConnectionFragment on PhoneNodeConnection {
   }
 }
 ${ fragment }
-`;
-
-export const fragmentNewConnection = gql`
-fragment newPhoneConnectionFragment on NewPhoneNodeConnection {
-  edges {
-    node {
-      ...newPhoneFragment
-    }
-  }
-}
-${ fragmentNew }
-`;
-
-export const fragmentRevisionConnection = gql`
-fragment phoneRevisionConnectionFragment on RevisionPhoneNodeConnection {
-  edges {
-    node {
-      ...phoneRevisionFragment
-    }
-  }
-}
-${ fragmentRevision }
 `;

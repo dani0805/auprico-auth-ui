@@ -32,6 +32,10 @@ export class UserProfileContactsComponent extends BaseComponent implements OnIni
 
   // this is needed to handle dynamic creation of form controls for contacts
   formControlContactIndex = 0;
+  emailGroup = new FormGroup({
+    label: new FormControl('', [Validators.required]),
+    value: new FormControl('', [Validators.required]),
+  });
   // search handler
   searchGroup = new FormGroup({
     firstName: new FormControl(),
@@ -108,7 +112,7 @@ export class UserProfileContactsComponent extends BaseComponent implements OnIni
   }
 
   notValidEmail(email: BEmail): boolean {
-    return !email.isDeleted && ((!email.label && !!email.val) || (!!email.label && !email.val));
+    return !email.isDeleted && ((!email.label && !!email.value) || (!!email.label && !email.value));
   }
 
   notValidPhone(phone: BPhone): boolean {
@@ -205,7 +209,7 @@ export class UserProfileContactsComponent extends BaseComponent implements OnIni
   contactsCount(user: BUser): number {
     let count = 0;
     for (const email of user.emails) {
-      if (email && email.val) {
+      if (email && email.value) {
         count += 1;
       }
     }

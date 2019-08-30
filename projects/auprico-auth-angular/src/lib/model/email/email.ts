@@ -4,7 +4,7 @@ import {BaseModel, rProperty} from '../versioned-model';
 export class BEmail extends BaseModel {
     @rProperty() id: string;
     @rProperty() label: string;
-    @rProperty() val: string;
+    @rProperty() value: string;
     @rProperty() isMain: boolean;
     @rProperty() isDeleted: boolean;
     @rProperty(Date) createdTs: Date;
@@ -22,7 +22,7 @@ export class BEmail extends BaseModel {
 
     init(json: any) {
         if (!json) {
-          this.val = '';
+          this.value = '';
         }
         for (const field of ['isMain', 'isDeleted']) {
           if (json[field] == 'TRUE') {
@@ -36,10 +36,9 @@ export class BEmail extends BaseModel {
 
 // fragments will contain only actual values of the object, no references to other tables
 export const fragment = gql`
-fragment emailFragment on EmailNode {
+fragment emailFragment on UserEmailNode {
     id,
     label,
-    val,
     value,
     isMain,
     createdTs,
@@ -48,30 +47,9 @@ fragment emailFragment on EmailNode {
 }
 `;
 
-export const fragmentNew = gql`
-fragment newEmailFragment on NewEmailNode {
-    id,
-    label,
-    val,
-    isMain,
-    isDeleted,
-}
-`;
-
-export const fragmentRevision = gql`
-fragment emailRevisionFragment on RevisionEmailNode {
-    id,
-    label,
-    val,
-    isMain,
-    createdTs,
-    editedTs,
-    isDeleted,
-}
-`;
 
 export const fragmentConnection = gql`
-fragment emailConnectionFragment on EmailNodeConnection {
+fragment emailConnectionFragment on UserEmailNodeConnection {
   edges {
     node {
       ...emailFragment
@@ -81,24 +59,3 @@ fragment emailConnectionFragment on EmailNodeConnection {
 ${ fragment }
 `;
 
-export const fragmentNewConnection = gql`
-fragment newEmailConnectionFragment on NewEmailNodeConnection {
-  edges {
-    node {
-      ...newEmailFragment
-    }
-  }
-}
-${ fragmentNew }
-`;
-
-export const fragmentRevisionConnection = gql`
-fragment emailRevisionConnectionFragment on RevisionEmailNodeConnection {
-  edges {
-    node {
-      ...emailRevisionFragment
-    }
-  }
-}
-${ fragmentRevision }
-`;
