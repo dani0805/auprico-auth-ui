@@ -1,0 +1,100 @@
+@import '../../../../variables';
+
+.icons-container i{
+    font-size: 15px;
+    padding-top: 30px;
+}
+
+.preferred {
+}
+
+.contact-deleted input {
+    text-decoration: line-through;
+}
+
+.contact-description {
+    padding-bottom: 5px;
+}
+
+.contact-label {
+    padding-bottom: 5px;
+}
+
+.suggestion-box {
+    background-color: rgb(247, 248, 249);
+    margin-right: 0;
+}
+
+.accept-title {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.inner-container {
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+    padding-left: 20px;
+}
+.inner-container > .row {
+    padding-bottom: 15px;
+}
+
+.row-save {
+    padding: 20px 0px;
+    text-align: right;
+}
+
+.delete-pi-toggle {
+    padding-right: 5%;
+}
+
+.container-contact-icons i{
+    padding-right: 8px;
+    font-size: 11pt;
+}
+
+.add-contact-icon {
+    padding-left: 0.75rem;
+}
+
+.contact-row {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: lightgray;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    padding-top: 10px;
+
+    .fa-trash {
+    }
+}
+
+.contact-row.suggestion {
+}
+
+.contact-row.imported {
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.mat-card.imported {
+    padding: 10px;
+    margin-top: 1rem;
+}
+
+.alignments-table {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: lightgray;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

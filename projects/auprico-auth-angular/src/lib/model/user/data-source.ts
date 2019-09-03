@@ -2,6 +2,8 @@ import {CollectionViewer, DataSource} from '@angular/cdk/typings/esm5/collection
 import {BUser} from './user';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {UserService, UserServiceFilter} from './user.service';
+import {BTeam} from "../team/team";
+import {TeamService} from "../team/team.service";
 
 
 export class UsersDataSource implements DataSource<BUser> {

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdministrationUsersComponent } from './administration-users.component';
-import { CreateUserComponent } from '../create-user/create-user.component';
+import { AdministrationTeamsComponent } from './administration-teams.component';
+import { CreateTeamComponent } from '../create-team/create-team.component';
 import { ICommonModule } from '../../common/common.module';
 
 @NgModule({
@@ -14,11 +14,11 @@ import { ICommonModule } from '../../common/common.module';
 
     ],
     declarations: [
-      AdministrationUsersComponent,
-      CreateUserComponent],
+      AdministrationTeamsComponent,
+      CreateTeamComponent],
     exports: [],
     providers: [],
-    entryComponents: [CreateUserComponent],
+    entryComponents: [CreateTeamComponent],
   })
-  export class AdministrationUsersModule { }
+  export class AdministrationTeamsModule { }
 

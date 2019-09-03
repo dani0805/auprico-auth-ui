@@ -1,0 +1,56 @@
+<div class="container administration-table-container">
+
+    <div class="row">
+        <div class="col">
+            <span class="tab-info-title">Teams Administration</span>
+
+          <i class="material-icons" (click)="openNewTeamCreation()">
+            add
+          </i>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-12">
+            <mat-form-field style="width:300px !important">
+                <input matInput (keyup)="searchChanged()" [(ngModel)]="searchString" placeholder="Search (minimum 3 characters)">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8"
+                       matSort matSortActive="pk" matSortDirection="asc" matSortDisableClear>
+
+                <!-- Icon Column -->
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.pk()}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="code">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> CODE</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.code}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> NAME</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="parent_team">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> PARENT TEAM</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.parentTeam?.name}}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="administrateTeam(row)"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSize]="10" [length]="dataSource.count$ | async"
+                           [pageSizeOptions]="[5, 10, 15,  25, 50, 100]" class="mat-elevation-z8"></mat-paginator>
+
+        </div>
+    </div>
+</div>

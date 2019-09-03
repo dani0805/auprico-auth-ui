@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+    <div class="row inner-container">
+
+        <!-- BASIC INFORMATION SECTION -->
+        <div class="col-5">
+            <div class="row">
+                <div class="col"><span class="tab-info-title">General Informations</span>
+                </div>
+            </div>
+
+            <!-- ROW 2 - Name -->
+            <div class="row">
+                <div class="col-1">
+                </div>
+
+                <div class="col-4">
+                    <mat-form-field class="mat-full-width">
+                        <input matInput placeholder="Name" [(ngModel)]="team.name"/>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-2">
+                </div>
+
+                <div class="col-4">
+                    <mat-form-field class="mat-full-width" [formGroup]="searchGroup">
+                        <input matInput placeholder="Code" [(ngModel)]="team.code" required
+                               formControlName="code"/>
+                        <mat-error *ngIf="searchGroup?.controls?.code?.hasError('required')">
+                            Code is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row row-save">
+        <div class="col">
+            <button mat-raised-button color="primary" (click)="save()">Save</button>
+        </div>
+    </div>
+
+
+
+</div>
